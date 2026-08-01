@@ -2,7 +2,8 @@ local vars = require("variables")
 
 hl.config({
     input = {
-        kb_layout          = "us",
+        kb_layout          = "us, dvorak",
+        kb_options         = "caps:escape_shifted_capslock",
         numlock_by_default = false,
         repeat_delay       = 250,
         repeat_rate        = 35,
