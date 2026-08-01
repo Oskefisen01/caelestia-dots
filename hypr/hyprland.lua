@@ -50,6 +50,13 @@ if type(overrides) == "table" then
     end
 end
 
+-- x11 scaling
+hl.config({
+    xwayland = {
+        force_zero_scaling = true,
+    },
+})
+
 -- Default monitor conf
 hl.monitor({
     output   = "",
