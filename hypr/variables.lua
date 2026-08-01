@@ -6,9 +6,9 @@ return {
     ------------------
 
     -- Apps
-    terminal                   = "foot",
+    terminal                   = "kitty",
     browser                    = "firefox",
-    editor                     = "codium",
+    editor                     = "nvim",
     fileExplorer               = "thunar",
     audioSettings              = "pavucontrol",
 
@@ -100,7 +100,7 @@ return {
     kbWindowFullscreen         = "SUPER + F",
     kbWindowBorderedFullscreen = "SUPER + ALT + F",
     kbToggleWindowFloating     = "SUPER + ALT + Space",
-    kbCloseWindow              = "SUPER + Q",
+    kbCloseWindow              = "SUPER + C",
 
     -- Special workspaces toggles
     kbSpecialWs                = "SUPER + S",
@@ -111,8 +111,8 @@ return {
 
     -- Apps
     kbTerminal                 = "SUPER + T",
-    kbBrowser                  = "SUPER + W",
-    kbEditor                   = "SUPER + C",
+    kbBrowser                  = "SUPER + B",
+    kbEditor                   = "SUPER + G",
     kbFileExplorer             = "SUPER + E",
     kbAudioSettings            = "CTRL + ALT + V",
 
