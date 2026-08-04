@@ -6,7 +6,7 @@ hl.config({
         kb_variant         = "dvorak",
         kb_options         = "caps:escape_shifted_capslock,grp:alt_shift_toggle",
         numlock_by_default = false,
-        repeat_delay       = 250,
+        repeat_delay       = 400,
         repeat_rate        = 35,
         focus_on_close     = 1,
 
