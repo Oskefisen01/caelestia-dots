@@ -85,6 +85,7 @@ tagged_rule(float_tag, {
 tagged_rule(float_tag, {
     "File (Operation|Upload)( Progress)?", -- File manager operation progress (upload, move, copy, etc)
     ".* Properties",                       -- File properties
+    'Rename ".*"',                         -- File renaming
 }, "title")
 
 
