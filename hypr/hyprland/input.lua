@@ -11,14 +11,9 @@ hl.config({
         focus_on_close     = 1,
 
         touchpad = {
-            sensitivity          = 0.2,
             natural_scroll       = true,
             disable_while_typing = vars.touchpadDisableTyping,
             scroll_factor        = vars.touchpadScrollFactor,
-        },
-
-        mouse = {
-            sensitivity = -0.3,
         },
     },
 
@@ -29,4 +24,16 @@ hl.config({
     cursor = {
         hotspot_padding = 1,
     },
+})
+
+-- Touchpad sensitivity
+hl.device({
+    name = "elan0676:00-04f3:3195-touchpad",
+    sensitivity = 0.2,
+})
+
+-- Razer DeathAdder Essential sensitivity
+hl.device({
+    name = "razer-razer-deathadder-essential-1",
+    sensitivity = -0.3,
 })
