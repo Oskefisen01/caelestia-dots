@@ -17,6 +17,18 @@ hl.config({
         },
     },
 
+        -- Razer mouse sensitivity
+hl.device({
+    name = "razer-razer-deathadder-essential-1",
+    sensitivity = 0.0,   -- adjust: -1.0 to 1.0
+})
+
+-- Elan touchpad sensitivity
+hl.device({
+    name = "elan0676:00-04f3:3195-touchpad",
+    sensitivity = -0.3,  -- adjust: -1.0 to 1.0
+})
+
     binds = {
         scroll_event_delay = 0,
     },
