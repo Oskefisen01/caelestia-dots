@@ -10,10 +10,15 @@ hl.config({
         repeat_rate        = 35,
         focus_on_close     = 1,
 
-        touchpad           = {
+        touchpad = {
+            sensitivity          = 0.2,
             natural_scroll       = true,
             disable_while_typing = vars.touchpadDisableTyping,
             scroll_factor        = vars.touchpadScrollFactor,
+        },
+
+        mouse = {
+            sensitivity = -0.3,
         },
     },
 
