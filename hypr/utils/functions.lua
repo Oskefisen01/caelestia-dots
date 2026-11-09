@@ -1,17 +1,23 @@
 local function wsaction(action, range, i)
     return function()
         local activews = hl.get_active_workspace()
-        if activews then
-            local id = activews.id
-            local s  = (i - 1) * 10 + (id % 10)
-            local t  = math.floor((id - 1) / 10) * 10 + i
-            local z  = (range == "group") and s or t
+        if not activews then return end
 
-            if action == "move" then
-                return hl.dispatch(hl.dsp.window.move({ workspace = z }))
-            else
-                return hl.dispatch(hl.dsp.focus({ workspace = z }))
-            end
+        local id = activews.id
+        if type(id) ~= "number" or id < 1 then
+            -- Named workspaces have no numbered group, fall back to the first one.
+            id = 1
+        end
+
+        local slot  = (id - 1) % 10 + 1
+        local z     = range == "group" and ((i - 1) * 10 + slot) or (math.floor((id - 1) / 10) * 10 + i)
+
+        if action == "move" then
+            return hl.dispatch(hl.dsp.window.move({ workspace = z }))
+        elseif action == "move_silent" then
+            return hl.dispatch(hl.dsp.window.move({ workspace = z, follow = false }))
+        else
+            return hl.dispatch(hl.dsp.focus({ workspace = z }))
         end
     end
 end
@@ -41,9 +47,8 @@ local function resize_active_window(x, y)
     end
 end
 
-local function resizer(window, pattern, x_percent, y_percent, actions, exact, field)
-    local value = window and window[field or "title"]
-    if value and string.find(value, pattern, 1, exact) then
+local function resizer(window, val_fn, x_percent, y_percent, actions)
+    if window and val_fn(window) then
         local disp = (type(actions) == "table") and actions or { actions }
         for _, x in ipairs(disp) do
             hl.dispatch(x)
@@ -57,7 +62,6 @@ local function resizer(window, pattern, x_percent, y_percent, actions, exact, fi
             sz.window = window
             hl.dispatch(hl.dsp.window.resize(sz))
         end
-        hl.dispatch(hl.dsp.window.set_prop({ prop = "keep_aspect_ratio", value = "true", window = window }))
     end
 end
 
@@ -84,6 +88,7 @@ local function move_actions(win)
         return {
             hl.dsp.window.resize({ x = x_resize, y = y_resize, window = win }),
             hl.dsp.window.move({ x = move_x, y = move_y, relative = false, window = win }),
+            hl.dsp.window.set_prop({ prop = "keep_aspect_ratio", value = "true", window = win })
         }
     end
 end
@@ -92,6 +97,7 @@ end
 local home       = os.getenv("HOME")
 local config_dir = os.getenv("XDG_CONFIG_HOME") or (home .. "/.config")
 local json       = require("utils.json") -- rxi's peak library
+local vars       = require("variables")
 
 -- Default config
 local function default_config()
@@ -253,9 +259,10 @@ local function toggle(special_workspace)
     return function()
         local active_workspace = hl.get_active_special_workspace()
 
-        -- Generic special workspace toggle: close if any is open, or open "special"
+        -- Generic special workspace toggle: close if any is open (if configured), or toggle "special"
         if special_workspace == "specialws" then
-            local target = active_workspace and active_workspace.name:gsub("^special:", "") or "special"
+            local close_any = vars.specialWsCloseAny == nil or vars.specialWsCloseAny
+            local target = close_any and active_workspace and active_workspace.name:gsub("^special:", "") or "special"
             return hl.dispatch(hl.dsp.workspace.toggle_special(target))
         end
 

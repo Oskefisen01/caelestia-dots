@@ -56,6 +56,7 @@ return {
     cursorTheme                = "sweet-cursors",
     cursorSize                 = 24,
     sleepGestureCmd            = "systemctl suspend-then-hibernate",
+    specialWsCloseAny          = true,
 
     ------------------
     ---- KEYBINDS ----
@@ -65,6 +66,7 @@ return {
     kbGoToWs                   = "SUPER",
     kbGoToWsGroup              = "CTRL + SUPER",
     kbMoveWinToWs              = "SUPER + ALT",
+    kbMoveWinToWsSilent        = "SUPER + SHIFT",
     kbMoveWinToWsGroup         = "CTRL + SUPER + ALT",
 
     -- All the following binds can be either an array of binds to bind multiple keys, or a single string.
